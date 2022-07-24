@@ -3,8 +3,9 @@ import logging
 import re
 import os
 booksList = []
+cartList = []
 class Store:
-    #booksList = []
+
     def append_list_as_row(file_name, booksList):
     
         try:    
@@ -17,10 +18,25 @@ class Store:
             infile.close()
         # Exception   
         except FileNotFoundError :
-            print("the <bookslist.txt> file is not found ")
+            print("the <bookslist.csv> file is not found ")
             print("Starting a new books list!")
-            booksList = []   
+            booksList = [] 
 
+    def append_list_as_row1(file_name, cartList):
+    
+        try:    
+        
+            infile1 = open("theCartList.csv", "r")
+            line = infile1.readline()
+            while line:
+                cartList.append(line.rstrip("\n").split(",") )
+                line = infile1.readline()
+            infile1.close()
+        # Exception   
+        except FileNotFoundError :
+            print("the <CartList.csv> file is not found ")
+            print("Starting a new Cart list!")
+            cartList = []  
     def AddaBook():
         print("Addig a book...")
         while True:
@@ -73,22 +89,27 @@ class Store:
         (booksList.append([nBook, nAuthor, nType, nPages]))
     
     def SearchBook():
-        #booksList = []
         print("Search here the book you want...")
         keyword = input("Enter Search Term: ")
         for book in booksList:
             if keyword in book:
                 print(book)
 
+    def AddtoCart():
+        ChooseBook = input("Which book do you like to add to cart? >>>")
+        for item in booksList:
+            if ChooseBook in item:
+                print("The", item, "is added to your cart")
+                booksList.remove(item)
+                cartList.append(item)
+
     def DisplayBook():
-        #booksList = []
         print("*******Here are my books...*******")
-        for i in range(len(booksList)):
-            print(booksList[i])
+        #for i in range(len(booksList)):
+        print(*booksList, sep ="\n")
 
     def BuyBook():
         key = input("Search here...")
-        #for books in booksList:
         for buybook in booksList:
             if key in buybook:
                 print("Thank you for purchasing the",buybook, "We will send it your address")
@@ -96,6 +117,8 @@ class Store:
                 booksList.append
         if key not in buybook:
             print("SORRY!! The book you are looking for is out of order...")
+
+    
 
 
     def quit():
@@ -106,4 +129,10 @@ class Store:
             outfile.write(",".join(book) + "\n")
         outfile.close()
 
+        outfile1 = open("theCartList.csv", "w")
+        for books in cartList:
+            outfile1.write(",".join(books) + "\n")
+        outfile1.close()
+
     append_list_as_row('theBooksList.csv', booksList)
+    append_list_as_row1('theCartList.csv', booksList)
