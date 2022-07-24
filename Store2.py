@@ -5,20 +5,21 @@ import os
 booksList = []
 class Store:
     #booksList = []
+    def append_list_as_row(file_name, booksList):
     
-    try:    
-     
-        infile = open("theBooksList.csv", "r")
-        line = infile.readline()
-        while line:
-            booksList.append(line.rstrip("\n").split(",") )
+        try:    
+        
+            infile = open("theBooksList.csv", "r")
             line = infile.readline()
-        infile.close()
-     # Exception   
-    except FileNotFoundError :
-        print("the <bookslist.txt> file is not found ")
-        print("Starting a new books list!")
-        booksList = []   
+            while line:
+                booksList.append(line.rstrip("\n").split(",") )
+                line = infile.readline()
+            infile.close()
+        # Exception   
+        except FileNotFoundError :
+            print("the <bookslist.txt> file is not found ")
+            print("Starting a new books list!")
+            booksList = []   
 
     def AddaBook():
         print("Addig a book...")
@@ -37,7 +38,7 @@ class Store:
         
         while True:
             try:
-                nAuthor = input("Enter the name of the author >>>")
+                nAuthor = input("Enter the name of the author \n>>>")
                 check = re.search(',', nAuthor)
 
                 if check != None:
@@ -50,7 +51,7 @@ class Store:
         
         while True:
             try:
-                nType = input("Type of the Book> >>>")
+                nType = input("Type of the Book\n>>>")
                 check = re.search(',', nType)
 
                 if check != None:
@@ -63,7 +64,7 @@ class Store:
         
         while True:
             try:
-                nPages = str(input("Enter the number of pages >>>"))
+                nPages = str(input("Enter the number of pages \n>>>"))
             except ValueError as ve:
                 print("\nCANNOT ENTER A STRING FOR AGE! PLEASE ENTER AN INTEGER!\n")
                 logging.error("Tried to enter a string for page, trying again...")
@@ -85,10 +86,24 @@ class Store:
         for i in range(len(booksList)):
             print(booksList[i])
 
+    def BuyBook():
+        key = input("Search here...")
+        #for books in booksList:
+        for buybook in booksList:
+            if key in buybook:
+                print("Thank you for purchasing the",buybook, "We will send it your address")
+                booksList.remove(buybook)
+                booksList.append
+        if key not in buybook:
+            print("SORRY!! The book you are looking for is out of order...")
+
+
     def quit():
         print("BYE BYE!!")
 
-    outfile = open("theBooksList.csv", "w")
-    for book in booksList:
-        outfile.write(",".join(book) + "\n")
-    outfile.close()
+        outfile = open("theBooksList.csv", "w")
+        for book in booksList:
+            outfile.write(",".join(book) + "\n")
+        outfile.close()
+
+    append_list_as_row('theBooksList.csv', booksList)
