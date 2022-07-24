@@ -36,8 +36,7 @@ def main():
         #             ("Sorry!! The book you are searching for is out of order")
                     
         elif choice == 4:
-            print("BYE BYE!!")
-    print("Thats all the options we have in our Store")
+            Store.quit()
     #os.system('cls')
     # Saving to external CSV file
 

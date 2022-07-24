@@ -85,6 +85,9 @@ class Store:
         for i in range(len(booksList)):
             print(booksList[i])
 
+    def quit():
+        print("BYE BYE!!")
+
     outfile = open("theBooksList.csv", "w")
     for book in booksList:
         outfile.write(",".join(book) + "\n")
