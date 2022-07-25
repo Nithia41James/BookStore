@@ -4,7 +4,15 @@ import re
 import os
 booksList = []
 cartList = []
-class Store:
+class Store:   
+
+    def __init__(self, nBook, nAuthor, nType, nPages, nPrice):
+        self.a1 = nBook
+        self.a1 = nAuthor
+        self.a1 = nType
+        self.a1 = nPages
+        self.a1 = nPrice
+              
 
     def append_list_as_row(file_name, booksList):
     
@@ -37,6 +45,8 @@ class Store:
             print("the <CartList.csv> file is not found ")
             print("Starting a new Cart list!")
             cartList = []  
+
+
     def AddaBook():
         print("Addig a book...")
         while True:
@@ -86,7 +96,15 @@ class Store:
                 logging.error("Tried to enter a string for page, trying again...")
             else:
                 break
-        (booksList.append([nBook, nAuthor, nType, nPages]))
+        while True:
+            try:
+                nPrice = str(input("Price of the book? \n>>>"))
+            except ValueError as ve:
+                print("\nCANNOT ENTER A STRING FOR AGE! PLEASE ENTER AN INTEGER!\n")
+                logging.error("Tried to enter a string for page, trying again...")
+            else:
+                break
+        (booksList.append([nBook, nAuthor, nType, nPages, nPrice]))
     
     def SearchBook():
         print("Search here the book you want...")
@@ -102,12 +120,7 @@ class Store:
                 print("The", item, "is added to your cart")
                 booksList.remove(item)
                 cartList.append(item)
-
-    def DisplayBook():
-        print("*******Here are my books...*******")
-        #for i in range(len(booksList)):
-        print(*booksList, sep ="\n")
-
+    
     def BuyBook():
         key = input("Search here...")
         for buybook in booksList:
@@ -117,9 +130,13 @@ class Store:
                 booksList.append
         if key not in buybook:
             print("SORRY!! The book you are looking for is out of order...")
+    def DisplayBook():
+        print("*******Here are my books...*******")
+        print(*booksList, sep ="\n")
 
-    
-
+    def ViewCart():
+        print("Items in cart")
+        print(*cartList, sep="\n")
 
     def quit():
         print("BYE BYE!!")

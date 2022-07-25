@@ -1,18 +1,19 @@
-from Store2 import Store 
+from Store2 import Store
 
 def main():
  
     
     choice = 0
     # Selection 
-    while choice != 6:
+    while choice != 7:
         print("\n*1*1*1*1*1*1*1*1*1*1*1*1*1*1*1*1* WELCOME to my BookStore... *1*1*1*1*1*1*1*1*1*1*1*1*1*1*1*1*\n")
         print("1) Add a book")
         print("2) Search the book")
         print("3) Display books")
         print("4) Add books to cart")
         print("5) Buy books")
-        print("6) Quit")
+        print("6) View Cart")
+        print("7) Quit")
         choice = int(input(">>>"))
         
         # Adding a book
@@ -30,11 +31,16 @@ def main():
         elif choice == 4:
             Store.AddtoCart()
 
-        # Purchasing a boook
+        # Purchasing a book
         elif choice == 5:
             Store.BuyBook()
-        #Quit the program            
+
+        # View Cart
         elif choice == 6:
+            Store.ViewCart()
+
+        #Quit the program            
+        elif choice == 7:
             Store.quit()
 
    
