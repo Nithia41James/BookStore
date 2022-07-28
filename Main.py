@@ -1,4 +1,4 @@
-from Store2 import Store
+from Store1 import Store
 
 def main():
  
