@@ -121,6 +121,16 @@ class Store:
                 booksList.remove(item)
                 cartList.append(item)
     
+    
+    def DisplayBook():
+        print("*******Here are my books...*******")
+        #for i in range(len(booksList)):
+        print(*booksList, sep ="\n")
+
+    def ViewCart():
+        print("Items in cart")
+        print(*cartList, sep="\n")
+
     def BuyBook():
         key = input("Search here...")
         for buybook in booksList:
@@ -130,13 +140,6 @@ class Store:
                 booksList.append
         if key not in buybook:
             print("SORRY!! The book you are looking for is out of order...")
-    def DisplayBook():
-        print("*******Here are my books...*******")
-        print(*booksList, sep ="\n")
-
-    def ViewCart():
-        print("Items in cart")
-        print(*cartList, sep="\n")
 
     def quit():
         print("BYE BYE!!")
@@ -150,6 +153,5 @@ class Store:
         for books in cartList:
             outfile1.write(",".join(books) + "\n")
         outfile1.close()
-
     append_list_as_row('theBooksList.csv', booksList)
-    append_list_as_row1('theCartList.csv', booksList)
+    append_list_as_row1('theCartList.csv', cartList)
